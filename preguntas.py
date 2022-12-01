@@ -22,10 +22,10 @@ def pregunta_01():
     y = df["strength"].values  
 
     # Asigne una copia del dataframe `df` a la variable `X`.
-    x = df.copy(x)  
+    x = df.copy()  
 
     # Remueva la columna `strength` del DataFrame `X`.
-    x.drop("strength")  
+    x.drop(columns="strength",inplace=True)  
 
     # Retorne `X` y `y`
     return x, y
@@ -82,7 +82,7 @@ def pregunta_03():
             ),
             (
                 "mlpregressor",
-                MLPRegressor(),  
+                MLPRegressor(random_state= 42),  
             ),
         ],
     )
@@ -111,12 +111,12 @@ def pregunta_04():
 
     param_grid = {
         hidden_layer_sizes: (8,),  
-        activation: "relu",  
-        learning_rate:"adaptive",  
-        momentum: 0.7,0.8,0.9,  
-        learning_rate_init: 0.01, 0.05, 0.1 ,  
-        max_iter: 5000,  
-        early_stopping: "True",  
+        activation: ["relu"],  
+        learning_rate:["adaptive"],  
+        momentum: [0.7,0.8,0.9],  
+        learning_rate_init: [0.01, 0.05, 0.1] ,  
+        max_iter: [5000],  
+        early_stopping: [True],  
     }
 
     estimator = pregunta_03()
@@ -129,7 +129,7 @@ def pregunta_04():
         estimator=estimator,
         param_grid=param_grid,
         cv = 5  
-        ___ = ____  
+        scoring = "r2"  
     )
 
     return gridsearchcv
@@ -153,8 +153,8 @@ def pregunta_05():
     estimator.fit(x_train, y_train)  #
 
     # Pronostique para las muestras de entrenamiento y validacion
-    y_trian_pred = estimator.predict(y_train)  
-    y_test_pred = estimator.predict(y_test)  
+    y_trian_pred = estimator.predict(x_train)  
+    y_test_pred = estimator.predict(x_test)  
 
     # Calcule el error cuadrático medio de las muestras
     mse_train = mean_squared_error(  
