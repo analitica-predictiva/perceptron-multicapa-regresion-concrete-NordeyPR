@@ -110,13 +110,13 @@ def pregunta_04():
     #   * Use parada temprana
 
     param_grid = {
-        hidden_layer_sizes: (8,),  
-        activation: ["relu"],  
-        learning_rate:["adaptive"],  
-        momentum: [0.7,0.8,0.9],  
-        learning_rate_init: [0.01, 0.05, 0.1] ,  
-        max_iter: [5000],  
-        early_stopping: [True],  
+        "mlpregressor__hidden_layer_sizes": (8,),  
+        "mlpregressor__activation": ["relu"],  
+        "mlpregressor__learning_rate":["adaptive"],  
+        "mlpregressor__momentum": [0.7,0.8,0.9],  
+        "mlpregressor__learning_rate_init": [0.01, 0.05, 0.1] ,  
+        "mlpregressor__max_iter": [5000],  
+        "mlpregressor__early_stopping": [True],  
     }
 
     estimator = pregunta_03()
@@ -153,13 +153,13 @@ def pregunta_05():
     estimator.fit(x_train, y_train)  #
 
     # Pronostique para las muestras de entrenamiento y validacion
-    y_trian_pred = estimator.predict(x_train)  
+    y_train_pred = estimator.predict(x_train)  
     y_test_pred = estimator.predict(x_test)  
 
     # Calcule el error cuadrático medio de las muestras
     mse_train = mean_squared_error(  
         y_train,  
-        y_trian_pred,  
+        y_train_pred,  
     )
     mse_test = mean_squared_error(  
         y_test,  
